@@ -15,7 +15,7 @@ DB_HOST='172.17.0.1'
 DB_PORT=3306
 DB_USERNAME='root'
 DB_PASSWORD='P@ssw0rd'
-DB_DATABASE='url-shortener'
+DB_DATABASE='short-url'
 ```
 
 ### `Docker`
