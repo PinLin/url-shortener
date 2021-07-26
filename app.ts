@@ -44,12 +44,27 @@ createConnection({
 
     app.post('/api/shortUrl', async (req, res) => {
         const data = req.body as CreateShortUrlDto;
+
+        const shortUrlRepository = connection.getRepository(ShortUrl);
+        if (data.shortCode) {
+            if (shortUrlRepository.findOne({ shortCode: data.shortCode })) {
+                res.status(409).send('Conflict');
+            }
+        } else {
+            while (true) {
+                data.shortCode = generateShortCode(6);
+                if (!shortUrlRepository.findOne({ shortCode: data.shortCode })) {
+                    break;
+                }
+            }
+        }
+
         const shortUrl = new ShortUrl();
         shortUrl.url = data.url;
-        shortUrl.shortCode = generateShortCode(6);
+        shortUrl.shortCode = data.shortCode;
         shortUrl.createdTime = new Date();
 
-        await connection.getRepository(ShortUrl).save(shortUrl);
+        await shortUrlRepository.save(shortUrl);
 
         res.status(201).send(shortUrl);
     });
