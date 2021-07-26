@@ -33,9 +33,14 @@ createConnection({
 
     app.get('/:shortCode', async (req, res) => {
         const shortCode = req.params.shortCode;
-        const shortUrl = await connection.getRepository(ShortUrl).findOne({ shortCode });
+
+        const shortUrlRepository = connection.getRepository(ShortUrl);
+        const shortUrl = await shortUrlRepository.findOne({ shortCode });
 
         if (shortUrl) {
+            shortUrl.clickCount++;
+            shortUrlRepository.save(shortUrl);
+
             res.redirect(shortUrl.url, 302);
         } else {
             res.status(404).send('Not Found');

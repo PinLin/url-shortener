@@ -10,4 +10,7 @@ export class ShortUrl {
 
     @Column()
     createdTime: Date;
+
+    @Column({ default: 0 })
+    clickCount: number;
 }
