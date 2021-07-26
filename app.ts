@@ -53,7 +53,7 @@ createConnection({
         } else {
             while (true) {
                 data.shortCode = generateShortCode(6);
-                if (!shortUrlRepository.findOne({ shortCode: data.shortCode })) {
+                if (!await shortUrlRepository.findOne({ shortCode: data.shortCode })) {
                     break;
                 }
             }
