@@ -5,7 +5,7 @@ export class ShortUrl {
     @PrimaryColumn()
     shortCode: string;
 
-    @Column()
+    @Column({ type: 'text' })
     url: string;
 
     @Column()
