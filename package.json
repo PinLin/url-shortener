@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "A simple url shortener.",
   "scripts": {
-    "start:dev": "ts-node app.ts",
+    "start:dev": "ts-node src/app.ts",
     "start": "node dist/app.js",
     "build": "tsc"
   },
