@@ -1,6 +1,8 @@
 import 'reflect-metadata';
 import bodyParser from 'body-parser';
 import Express from 'express';
+import helmet from 'helmet';
+import morgan from 'morgan';
 import { config } from 'dotenv';
 import { createConnection } from 'typeorm';
 import { ShortUrl } from './entity/short-url';
@@ -10,6 +12,8 @@ import { generateShortCode } from './util/generate-short-code';
 config();
 
 const app = Express();
+app.use(helmet());
+app.use(morgan('common'));
 app.use(bodyParser.json());
 
 createConnection({
