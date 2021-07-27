@@ -56,7 +56,7 @@ createConnection({
 
         const shortUrlRepository = connection.getRepository(ShortUrl);
         if (data.shortCode) {
-            if (shortUrlRepository.findOne({ shortCode: data.shortCode })) {
+            if (await shortUrlRepository.findOne({ shortCode: data.shortCode })) {
                 res.status(409).send('Conflict');
             }
         } else {
