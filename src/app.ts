@@ -68,6 +68,10 @@ createConnection({
             }
         }
 
+        if (!data.url.includes('://')) {
+            data.url = 'http://' + data.url;
+        }
+
         const shortUrl = new ShortUrl();
         shortUrl.url = data.url;
         shortUrl.shortCode = data.shortCode;
